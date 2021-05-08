@@ -1,5 +1,7 @@
 import firebase from "firebase";
-import "firebase/auth"; // If you need it
+import "firebase/auth";
+import 'firebase/firestore';
+
 
 export const config = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,6 +17,7 @@ export const config = {
 
 export const auth = firebase.auth();
 export const Firebase = firebase;
+export const db = firebase.firestore();
 
 export const Login = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
