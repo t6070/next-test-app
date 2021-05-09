@@ -1,7 +1,7 @@
 import { db } from "../../lib/firebase";
 import React, { useState, useEffect } from "react";
 // useStateの型宣言
-type Content = {
+export type Content = {
 	tweet:string;
 	user_id:number;
 };
@@ -33,15 +33,14 @@ const GetContentsList = () => {
 	},[]);
 	return (
 		<div>
-			{lists.map(list=>{
+			{lists.map((list,i)=>{
 				return(
-					<ul>
+					<ul key={i}>
 						<li>{list.tweet}</li>
 						<li>{list.user_id}</li>
 					</ul>
 				)
-			})
-			}
+			})}
 		</div>
 	)
 }
