@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Login, Logout, auth } from "../lib/firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +33,11 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             テストアプリ
           </Typography>
-          <Button color="inherit">Login</Button>
+			{
+				auth.currentUser ?
+				<Button color="inherit" onClick={() => Logout()}>Logout</Button>:
+				<Button color="inherit" onClick={() => Login()}>Login</Button>
+			}
         </Toolbar>
       </AppBar>
     </div>

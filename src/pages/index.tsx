@@ -1,35 +1,30 @@
-// import Link from "next/link";
 import Layout from "../components/Layout";
-import { Login, Logout, auth } from "../lib/firebase";
-import Button from '@material-ui/core/Button';
+import { auth } from "../lib/firebase";
 import Link from "next/link";
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  mainMessage: {
+    fontSize: 20
+  }
+}));
 
-
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <div>
-      <Button variant="contained" color="secondary" onClick={() => Login()}>ログイン</Button>
-      <Button  variant="contained" color="secondary" onClick={() => Logout()}>ログアウト</Button>
-    </div>
-    <div>
-      <pre>
-        {auth.currentUser
-          ? auth.currentUser.displayName + "でログインしています"
-          : "ログインしていません"
-        }
-      </pre>
-    </div>
-    <div>
-      <pre>
-        {auth.currentUser ? 
-          <Link href ="/contents/my-content">マイページ</Link>
-          : "ログインするとマイページへ移動することができます"
-        }
-      </pre>
-    </div>
-  </Layout>
-);
-
-export default IndexPage;
+export default function IndexPage() {
+  const classes = useStyles();
+  return(
+    <Layout title="test-app">
+      {auth.currentUser ?
+        <h1 className={classes.mainMessage}>Hello!{auth.currentUser.displayName}！👋</h1>
+        :<h1>ログインしてください</h1>
+      }
+      <div>
+        <pre>
+          {auth.currentUser ? 
+            <Link href ="/contents/my-content">マイページ</Link>
+            : "ログインするとマイページへ移動することができます"
+          }
+        </pre>
+      </div>
+    </Layout>
+  )
+};
